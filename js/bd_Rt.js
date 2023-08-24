@@ -1,4 +1,4 @@
-const rutas = [
+export const baserta = [
     {
       id: 1,
       nombre: "Ruta del Café Quindiano",

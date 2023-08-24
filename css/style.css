@@ -1,0 +1,26 @@
+body{
+    background-color: aqua;
+    
+}
+.contenedor-padre{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+.padre{
+   display: flex;
+justify-content: center;
+background-color: beige;}
+
+.contenedor-hijo1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: rgb(234, 94, 94);
+    grid-gap: 20px;
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
