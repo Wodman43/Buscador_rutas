@@ -16,7 +16,8 @@ const kmmax = document.getElementById('kmmax');
 const kmmin = document.getElementById('kmmin');
 const estado = document.getElementById('estado');
 const calificacion = document.getElementById('calificacion');
-const tpovia = document.getElementById('calificacion');
+const tpovia = document.getElementById('tpovia');
+const resultado = document.getElementById('resultado');
 
 // function llenarutas() {
 //   console.log("LLenado el Select");
@@ -27,11 +28,20 @@ const tpovia = document.getElementById('calificacion');
 //   }
 // }
 
+const datosBusqueda = {
+  id:"",
+  rutas: "",
+  kms:"",
+  estado: "",
+  calificacion: "",
+  tpovia: "",
+};
+
+
 document.addEventListener("DOMContentLoaded", () => {
   llenaruta();
-  llenakmmin();
   llenakmmax();
-  llenaestado();
+  llenakmin();
 });
 
 
@@ -41,139 +51,178 @@ function llenaruta(){
     const opcion = document.createElement("option");
     opcion.innerHTML = e.nombre;
     rutas.appendChild(opcion);
+
+
+
+    
   })}
 
-  function llenakmmin(){
-    baserta.forEach(e => {
-      console.log("LLenado el Select");
-      const opcion = document.createElement("option");
-      opcion.innerHTML = e.minKilometros;
-      kmmin.appendChild(opcion);
-    })}
 
     function llenakmmax(){
       baserta.forEach(e => {
         console.log("LLenado el Select");
         const opcion = document.createElement("option");
-        opcion.innerHTML = e.maxKilometros;
+        opcion.innerHTML = e.kms;
         kmmax.appendChild(opcion);
       })}
 
-      function llenaestado(){
+      function llenakmin(){
         baserta.forEach(e => {
           console.log("LLenado el Select");
           const opcion = document.createElement("option");
-          opcion.innerHTML = e.estado;
-          estado.appendChild(opcion);
+          opcion.innerHTML = e.kms;
+          kmmin.appendChild(opcion);
         })}
 
 
+  rutas.addEventListener("change", (e) => {
+  datosBusqueda.rutas = e.target.value;
+  console.log(datosBusqueda);
+  // filtrarRuta();
+  filtrarttodo();
+});
 
+kmmax.addEventListener("change", (e) => {
+  datosBusqueda.kms = parseFloat(e.target.value);
+  console.log(datosBusqueda);
+  // filtrarMkm();
+  filtrarttodo();
+});
+
+kmmin.addEventListener("change", (e) => {
+  datosBusqueda.kms = parseFloat(e.target.value);
+  console.log(datosBusqueda);
+  // filtrarMkm();
+  filtrarttodo();
+});
+
+
+estado.addEventListener("change", (e) => {
+  datosBusqueda.estado = e.target.value;
+  console.log(datosBusqueda);
+  // filtrarestado();
+  filtrarttodo();
+});
+
+calificacion.addEventListener("change", (e) => {
+  datosBusqueda.calificacion = parseFloat(e.target.value);
+  console.log(datosBusqueda);
+  // filtrarcalific();
+  filtrarttodo();
+});
+
+tpovia.addEventListener("change", (e) => {
+  datosBusqueda.tpovia = e.target.value;
+  console.log(datosBusqueda);
+  // filtrartpovia();
+  filtrarttodo();
+});
 
 
 // const max = new Date().getFullYear();
 // const min = max - 20;
 
-//Generando un objeto con la búsqueda
-// const datosBusqueda = {
-//   id: "",
-//   rutas: "",
-//   maxkm: "",
-//   minkm: "",
-//   estado: "",
-//   calificacion: "",
-//   tpovia: "",
-// };
-
-//ESTE APARTADO PARA LOS EVENTOS
+function mostrarRutas(base) {
+  resultado.innerHTML = "";
+  base.forEach((ruta) => {
+    const autoHTML = document.createElement("p");
+    autoHTML.innerHTML = `
+             <p> Nombre Ruta: ${ruta.nombre}/ Kilometros: ${ruta.kms}/ Calificacion: ${ruta.calificacion}/ Estado: ${ruta.estado}/ Tipo Via: ${ruta.tipoVia}</p>
+         `;
+    resultado.appendChild(autoHTML);
+  });
+}
 
 
-
-// //EVENTOS PARA CADA UNO DE LOS SELECT
-
-// rutas.addEventListener("change", (e) => {
-//   console.log("Se escogio una opción");
-//   console.log(e.target.value); //este valor es el que se debe de almacenar en el objeto que se creo
-//   datosBusqueda.rutas = e.target.value;
-//   //console.log(datosBusqueda);
-//   //filtrarAuto();
-// });
-
-//ESTE APARTADO PARA LAS FUNCIONES
-
-//definimos la funcion mostrarAutos
-// function mostrarAutos() {
-//   autos.forEach((auto) => {
-//     const autoHTML = document.createElement("p");
-//     autoHTML.innerHTML = `
-//              <p>${auto.marca} ${auto.modelo} - ${auto.year} - ${auto.puertas} Puertas - Transmisión: ${auto.transmision} - Precio: ${auto.precio} - Color: ${auto.color}</p>
-//          `;
-//     resultado.appendChild(autoHTML);
+// function filtrarRuta(){
+//   const resultado = baserta.filter(ruta=>{
+//     if (datosBusqueda.rutas) {
+//       return ruta.nombre === datosBusqueda.rutas;
+//     }
+//     return ruta;
 //   });
-// }
-
-// function llenarSelect() {
-//   console.log("LLenado el Select");
-//   // console.log(min);
-//   // console.log(max);
-//   for (let i = max; i >= min; i--) {
-//     //este es cambio para que me muestre los años desde el max
-//     for (let i = min; i <= max; i++) {
-//     const opcion = document.createElement("option");
-//     opcion.value = i;
-//     opcion.textContent = i;
-//     year.appendChild(opcion);
-//   }
-// }
-// const nose = (ruta)=> baserta.filter(rut=> rut.rutas === ruta);
-// console.log(nose('Camino de los Tayrona'));
-
-// function llenarutas(){
-//   baserta.forEach((e)=>{
-    
-
-//   })}
-
-
-// year.addEventListener("change", (e) => {
-//   datosBusqueda.year = e.target.value;
-//   console.log(datosBusqueda);
-// });
-
-// minimo.addEventListener("change", (e) => {
-//   datosBusqueda.minimo = e.target.value;
-//   console.log(datosBusqueda);
-// });
-
-// maximo.addEventListener("change", (e) => {
-//   datosBusqueda.maximo = e.target.value;
-//   console.log(datosBusqueda);
-// });
-
-// puertas.addEventListener("change", (e) => {
-//   datosBusqueda.puertas = e.target.value;
-//   console.log(datosBusqueda);
-// });
-
-// transmision.addEventListener("change", (e) => {
-//   datosBusqueda.transmision = e.target.value;
-//   console.log(datosBusqueda);
-// });
-
-// color.addEventListener("change", (e) => {
-//   datosBusqueda.color = e.target.value;
-//   console.log(datosBusqueda);
-// });
-
-// function filtrarAuto() {
-//   console.log("Filtrando por automoviles");
-//   const resultado = autos.filter(filtrarMarca);
 //   console.log(resultado);
+//   mostrarRutas(resultado);
 // }
 
-// function filtrarMarca(auto) {
-//   if (datosBusqueda.marca) {
-//     return auto.marca === datosBusqueda.marca;
-//   }
-//   return auto;
+
+
+
+// function filtrarmkm(){
+//   const resultado = baserta.filter(ruta=>{
+//     if (datosBusqueda.minkm) {
+//       return ruta.minKilometros === datosBusqueda.minkm;
+//     }else{
+//       console.log('no hay paila')
+//     }
+//     return ruta;
+//   });
+//   console.log(resultado);
+//   mostrarRutas(resultado);
 // }
+
+// function filtrarMkm(){
+//   const resultado = baserta.filter(ruta=>{
+//     if (datosBusqueda.maxkm) {
+//       return ruta.maxKilometros === datosBusqueda.maxkm;
+//     }else{
+//       console.log('no hay paila')
+//     }
+//     return ruta;
+//   });
+//   console.log(resultado);
+//   mostrarRutas(resultado);
+// }
+
+// function filtrarestado(){
+//   const resultado = baserta.filter(ruta=>{
+//     if (datosBusqueda.estado) {
+//       return ruta.estado === datosBusqueda.estado;
+//     }else{
+//       console.log('no hay paila')
+//     }
+//     return ruta;
+//   });
+//   console.log(resultado);
+//   mostrarRutas(resultado);
+// }
+
+// function filtrarcalific(){
+//   const resultado = baserta.filter(ruta=>{
+//     if (datosBusqueda.calificacion) {
+//       return ruta.calificacion === datosBusqueda.calificacion;
+//     }else{
+//       console.log('no hay paila')
+//     }
+//     return ruta;
+//   });
+//   console.log(resultado);
+//   mostrarRutas(resultado);
+// }
+
+// function filtrartpovia(){
+//   const resultado = baserta.filter(ruta=>{
+//     if (datosBusqueda.tpovia) {
+//       return ruta.tipoVia === datosBusqueda.tpovia;
+//     }else{
+//       console.log('no hay paila')
+//     }
+//     return ruta;
+//   });
+//   console.log(resultado);
+//   mostrarRutas(resultado);
+// }
+
+
+function filtrarttodo(){
+  const resultado = baserta.filter(ruta=>{
+    if (datosBusqueda.rutas || datosBusqueda.kms || datosBusqueda.estado || datosBusqueda.calificacion || datosBusqueda.tpovia) {
+      return ruta.nombre === datosBusqueda.rutas ||ruta.kms === datosBusqueda.kms || ruta.estado === datosBusqueda.estado || ruta.calificacion === datosBusqueda.calificacion || ruta.tipoVia === datosBusqueda.tpovia;
+    }
+    return ruta;
+  });
+
+  if(resultado)
+  console.log(resultado);
+  mostrarRutas(resultado);
+}
