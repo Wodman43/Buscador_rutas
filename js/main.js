@@ -11,7 +11,8 @@ const resultado = document.getElementById('resultado');
 
 const datosBusqueda = {
   rutas: "",
-  kms: "",
+  max: "",
+  min:"",
   estado: "",
   calificacion: "",
   tpovia: "",
@@ -38,7 +39,7 @@ function llenaruta() {
 function llenakmmax() {
   baserta.forEach(e => {
     const opcion = document.createElement("option");
-    opcion.innerHTML = e.kms;
+    opcion.innerHTML = e.maxKilometros;
     kmmax.appendChild(opcion);
   });
 }
@@ -46,7 +47,7 @@ function llenakmmax() {
 function llenakmin() {
   baserta.forEach(e => {
     const opcion = document.createElement("option");
-    opcion.innerHTML = e.kms;
+    opcion.innerHTML = e.minKilometros;
     kmmin.appendChild(opcion);
   });
 }
@@ -58,12 +59,12 @@ rutas.addEventListener("change", (e) => {
 });
 
 kmmax.addEventListener("change", (e) => {
-  datosBusqueda.kms = e.target.value;
+  datosBusqueda.max = e.target.value;
   filtrarttodo();
 });
 
 kmmin.addEventListener("change", (e) => {
-  datosBusqueda.kms = e.target.value;
+  datosBusqueda.min = e.target.value;
   filtrarttodo();
 });
 
@@ -85,16 +86,18 @@ tpovia.addEventListener("change", (e) => {
 
 function filtrarttodo() {
   const resultado= baserta.filter(ruta => {
-    if (datosBusqueda.rutas ||datosBusqueda.kms ||datosBusqueda.estado ||datosBusqueda.calificacion ||datosBusqueda.tpovia){
+    if (datosBusqueda.rutas ||datosBusqueda.max || datosBusqueda.min ||datosBusqueda.estado ||datosBusqueda.calificacion ||datosBusqueda.tpovia){
     return (
       (datosBusqueda.rutas === "" || ruta.nombre === datosBusqueda.rutas) &&
-      (datosBusqueda.kms === "" || ruta.kms === parseFloat(datosBusqueda.kms)) &&
+      (datosBusqueda.max === "" || ruta.maxKilometros <= parseFloat(datosBusqueda.max )) &&
+      (datosBusqueda.min === "" || ruta.minKilometros >= parseFloat(datosBusqueda.min )) &&
       (datosBusqueda.estado === "" || ruta.estado === datosBusqueda.estado) &&
       (datosBusqueda.calificacion === "" || ruta.calificacion === parseFloat(datosBusqueda.calificacion)) &&
       (datosBusqueda.tpovia === "" || ruta.tipoVia === datosBusqueda.tpovia)
     );}
-  });
 
+    console.log(resultado)
+  });
   mostrarRutas(resultado);
 }
 
@@ -110,7 +113,17 @@ function mostrarRutas(base) {
     base.forEach((ruta) => {
       const lasrutas = document.createElement("p");
       lasrutas.innerHTML = `
-        <p> Nombre Ruta: ${ruta.nombre}/ Kilometros: ${ruta.kms}/ Calificacion: ${ruta.calificacion}/ Estado: ${ruta.estado}/ Tipo Via: ${ruta.tipoVia}</p>
+        <p> Nombre Ruta: <b>${ruta.nombre}</b>
+        <br>
+        Kilometros Min: <b>${ruta.minKilometros}</b>
+        <br>
+        Kilometros Max: <b>${ruta.maxKilometros}</b>
+        <br>
+        Calificacion: <b>${ruta.calificacion}</b>
+        <br>
+        Estado: <b>${ruta.estado}</b>
+        <br>
+        Tipo Via: <b>${ruta.tipoVia}</b></p>
       `;
       resultado.appendChild(lasrutas);
     });

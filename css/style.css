@@ -1,8 +1,9 @@
-body{
-    background-color: aqua;
+ body{
+    background-color: #82df89;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     
 }
-.contenedor-padre{
+/* .contenedor-padre{
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 20px;
@@ -23,4 +24,109 @@ background-color: beige;}
     display: flex;
     justify-content: center;
     align-items: center;
+}  */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #82df89;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    color: black;
+}
+
+.titulo {
+    font-size: 24px;
+}
+
+/* Estilos para el formulario */
+.formulario {
+    margin: 20px auto;
+    width: 80%;
+}
+
+.contenedor-padre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.padre h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#resultado {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;  
+    padding: 10px;  
+}
+
+/* Estilos para select */
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+}
+
+/* Estilos para opciones del select */
+select option {
+    background-color: white;
+}
+
+/* Estilos para el botón */
+button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Estilos específicos */
+.contenedor-hijo1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Estilos para los campos de selección */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Media query para ajustar diseño en pantallas grandes */
+@media (min-width: 800px) {
+    .contenedor-hijo1 {
+        flex-wrap: nowrap;
+    }
 }
